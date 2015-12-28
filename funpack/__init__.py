@@ -37,7 +37,7 @@ class funpack:
 		"""
 		Initialize the fast unpacker with data source @src and use the endian @endian for all unpacks.
 		@src is any type that struct.unpack() accepts.
-		@endian can be either a character (@, =, <, >, or !) or an Endianness enum value.
+		@endian can be either a character (@, =, <, >, or !), case-insentivie names (native, nativenoalign, little, big, net, or network) or an Endianness enum value.
 		@offset is the default offset to start unpacking from.
 		"""
 
@@ -47,6 +47,14 @@ class funpack:
 			elif endian == Endianness.Little.value:			endian = Endianness.Little
 			elif endian == Endianness.Big.value:			endian = Endianness.Big
 			elif endian == Endianness.Network.value:		endian = Endianness.Network
+
+			elif endian.lower() == 'native':				endian = Endianness.Native
+			elif endian.lower() == 'nativenoalign':			endian = Endianness.NativeNoAlign
+			elif endian.lower() == 'little':				endian = Endianness.Little
+			elif endian.lower() == 'big':					endian = Endianness.Big
+			elif endian.lower() == 'net':					endian = Endianness.Network
+			elif endian.lower() == 'network':				endian = Endianness.Network
+
 			else:
 				raise ValueError("Unrecognized endian value '%s' expected @, =, <, >, or !" % endian)
 
