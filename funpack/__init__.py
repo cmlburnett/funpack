@@ -454,3 +454,100 @@ class funpack:
 		self.Offset += multiplier*ln + tweak
 		return ln
 
+def test():
+	dat = struct.pack(Endianness.Big.value + "B"*10 + "H"*10 + "I"*10 + "Q"*10 + "fdf", *(list(range(40)) + [1.25, 2.5, 3.75]))
+
+	f = funpack(dat, endian=Endianness.Big)
+
+	# ------------- u8 -------------
+	assert(f.u8() == 0)
+	assert(f.pad() == None)
+	assert(f.u8(2) == (2,3))
+	assert(f.u8(2) == (4,5))
+	assert(f.u8() == 6)
+	assert(f.u8() == 7)
+	assert(f.u8(2) == (8,9))
+
+	# ------------- u16 -------------
+	assert(f.u16() == 10)
+	assert(f.pad(2) == None)
+	assert(f.u16(2) == (12,13))
+	assert(f.u16(2) == (14,15))
+	assert(f.u16() == 16)
+	assert(f.u16() == 17)
+	assert(f.u16(2) == (18,19))
+
+	# ------------- u32 -------------
+	assert(f.u32() == 20)
+	assert(f.pad(4) == None)
+	assert(f.u32(2) == (22,23))
+	assert(f.u32(2) == (24,25))
+	assert(f.u32() == 26)
+	assert(f.u32() == 27)
+	assert(f.u32(2) == (28,29))
+
+	# ------------- u64 -------------
+	assert(f.u64() == 30)
+	assert(f.pad(8) == None)
+	assert(f.u64(2) == (32,33))
+	assert(f.u64(2) == (34,35))
+	assert(f.u64() == 36)
+	assert(f.u64() == 37)
+	assert(f.u64(2) == (38,39))
+
+	# ------------- float -------------
+
+	assert(f.f32() == 1.25)
+	assert(f.f64() == 2.5)
+	assert(f.f32() == 3.75)
+
+	def lenpack(ln, char):
+		return struct.pack(Endianness.Big.value + "B" + char*ln, ln, *(list(range(ln))))
+
+
+	# ------------- len 10, 8-bit -------------
+	f = funpack(lenpack(10, "B"), endian=Endianness.Big)
+	assert(f.u8len_u8dat() == (0,1,2,3,4,5,6,7,8,9))
+
+	# ------------- len 20, 8-bit -------------
+	f = funpack(lenpack(20, "B"), endian=Endianness.Big)
+	assert(f.u8len_u8dat() == (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19))
+
+	# ------------- len 15, 16-bit -------------
+	f = funpack(lenpack(15, "H"), endian=Endianness.Big)
+	assert(f.u8len_u16dat() == (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14))
+
+	# ------------- len 30, 32-bit -------------
+	f = funpack(lenpack(30, "I"), endian=Endianness.Big)
+	assert(f.u8len_u32dat() == (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29))
+
+
+	def jumppack(ln, jmp, char):
+		return struct.pack(Endianness.Big.value + "B" + char*ln, *([jmp] + list(range(ln))))
+
+	# ------------- 8-bit jump 3 in 40 -------------
+	f = funpack(jumppack(50, 3, "B"), endian=Endianness.Big)
+	assert(f.u8jump(multiplier=1) == 3)
+	assert(f.u8() == 3)
+
+	# ------------- 16-bit jump 3 in 40 -------------
+	f = funpack(jumppack(50, 3, "H"), endian=Endianness.Big)
+	assert(f.u8jump(multiplier=2) == 3)
+	assert(f.u16() == 3)
+
+	# ------------- 32-bit jump 3 in 40 -------------
+	f = funpack(jumppack(50, 3, "I"), endian=Endianness.Big)
+	assert(f.u8jump(multiplier=4) == 3)
+	assert(f.u32() == 3)
+
+	# ------------- 64-bit jump 3 in 40 -------------
+	f = funpack(jumppack(50, 3, "Q"), endian=Endianness.Big)
+	assert(f.u8jump(multiplier=8) == 3)
+	assert(f.u64() == 3)
+
+	print("All is good")
+
+
+if __name__ == '__main__':
+	test()
+
