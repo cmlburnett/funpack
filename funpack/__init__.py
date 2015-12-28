@@ -234,3 +234,180 @@ class funpack:
 		"""
 		return self._short('d', times)
 
+	# ----------------------------------------
+	# Length-driven reads
+
+	# u8 length, unsigned data
+
+	def u8len_u8dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many unsigned 8-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.u8(ln)
+
+	def u8len_u16dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many unsigned 16-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.u16(ln)
+
+	def u8len_u32dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many unsigned 32-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.u32(ln)
+
+	def u8len_u64dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many unsigned 64-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.u64(ln)
+
+	# ---------
+	# u8 length, signed data
+
+	def u8len_s8dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many signed 8-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.s8(ln)
+
+	def u8len_s16dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many signed 16-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.s16(ln)
+
+	def u8len_s32dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many signed 32-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.s32(ln)
+
+	def u8len_s64dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many signed 64-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.s64(ln)
+
+	# ---------
+	# u16 length, unsigned data
+
+	def u16len_u8dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many unsigned 8-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.u8(ln)
+
+	def u16len_u16dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many unsigned 16-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.u16(ln)
+
+	def u16len_u32dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many unsigned 32-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.u32(ln)
+
+	def u16len_u64dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many unsigned 64-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.u64(ln)
+
+	# ---------
+	# u16 length, signed data
+
+	def u16len_s8dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many signed 8-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.s8(ln)
+
+	def u16len_s16dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many signed 16-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.s16(ln)
+
+	def u16len_s32dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many signed 32-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.s32(ln)
+
+	def u16len_s64dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many signed 64-bit values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.s64(ln)
+
+	# ---------
+	# u8 and u16 length, 32-bit float data
+
+	def u8len_f32dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many 32-bit float values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.f32(ln)
+
+	def u8len_f64dat(self):
+		"""
+		Reads an unsigned 8-bit value as a length and that many 64-bit float values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u8()
+		return self.f64(ln)
+
+	def u16len_f32dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many 32-bit float values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.f32(ln)
+
+	def u16len_f64dat(self):
+		"""
+		Reads an unsigned 16-bit value as a length and that many 64-bit float values are read and returned.
+		The length is not returned, but if you need it you should just make the two calls yourself.
+		"""
+		ln = self.u16()
+		return self.f64(ln)
+
