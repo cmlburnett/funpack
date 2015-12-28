@@ -411,3 +411,46 @@ class funpack:
 		ln = self.u16()
 		return self.f64(ln)
 
+	# ----------------------------------------
+	# Offset jumps
+
+	def u8jump(self, multiplier=1, tweak=0):
+		"""
+		Read an unsigned 8-bit value, and jump offset by that much.
+		The @multiplier is a multiple of the jump value.
+		Also, @tweak may can tweak the jumped offset (after multiplying by @multiplier).
+		"""
+		ln = self.u8()
+		self.Offset += multiplier*ln + tweak
+		return ln
+
+	def u16jump(self, multiplier=1, tweak=0):
+		"""
+		Read an unsigned 16-bit value, and jump offset by that much.
+		The @multiplier is a multiple of the jump value.
+		Also, @tweak may can tweak the jumped offset (after multiplying by @multiplier).
+		"""
+		ln = self.u16()
+		self.Offset += multiplier*ln + tweak
+		return ln
+
+	def u32jump(self, multiplier=1, tweak=0):
+		"""
+		Read an unsigned 32-bit value, and jump offset by that much.
+		The @multiplier is a multiple of the jump value.
+		Also, @tweak may can tweak the jumped offset (after multiplying by @multiplier).
+		"""
+		ln = self.u32()
+		self.Offset += multiplier*ln + tweak
+		return ln
+
+	def u64jump(self, multiplier=1, tweak=0):
+		"""
+		Read an unsigned 64-bit value, and jump offset by that much.
+		The @multiplier is a multiple of the jump value.
+		Also, @tweak may can tweak the jumped offset (after multiplying by @multiplier).
+		"""
+		ln = self.u64()
+		self.Offset += multiplier*ln + tweak
+		return ln
+
