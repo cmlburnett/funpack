@@ -32,4 +32,24 @@ With funpack:
 That's it. The offset counter is stored inside the funpack() object and the endianness is automatically applied to each unpack operation.
 The resulting code is significantly cleaner and avoids hard-to-debug messy errors from not passing the extact string to unpack and calcsize, etc.
 
+funpack functions:
+	pad		Reads padding bytes
+	u8		Reads 8-bit unsigned integer
+	u16		Reads 16-bit unsigned integer
+	u32		Reads 32-bit unsigned integer
+	u64		Reads 64-bit unsigned integer
+	s8		Reads 8-bit signed integer
+	s16		Reads 16-bit signed integer
+	s32		Reads 32-bit signed integer
+	s64		Reads 64-bit signed integer
+	f32		Reads 32-bit float ("float")
+	f64		Reads 64-bit float ("double")
+
+	Unpack	Accepts a struct format string and returns results in a tuple
+
+funpack properties:
+	Offset	Gets/sets the current offset within the data stream
+	Endian	Gets/sets the endianness of the data source, which can be an Endianness value or string
+	Src		Gets the data source being unpacked
+
 

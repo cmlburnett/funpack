@@ -41,32 +41,16 @@ class funpack:
 		@offset is the default offset to start unpacking from.
 		"""
 
-		if type(endian) == str:
-			if endian == Endianness.Native.value:			endian = Endianness.Native
-			elif endian == Endianness.NativeNoAlign.value:	endian = Endianness.NativeNoAlign
-			elif endian == Endianness.Little.value:			endian = Endianness.Little
-			elif endian == Endianness.Big.value:			endian = Endianness.Big
-			elif endian == Endianness.Network.value:		endian = Endianness.Network
-
-			elif endian.lower() == 'native':				endian = Endianness.Native
-			elif endian.lower() == 'nativenoalign':			endian = Endianness.NativeNoAlign
-			elif endian.lower() == 'little':				endian = Endianness.Little
-			elif endian.lower() == 'big':					endian = Endianness.Big
-			elif endian.lower() == 'net':					endian = Endianness.Network
-			elif endian.lower() == 'network':				endian = Endianness.Network
-
-			else:
-				raise ValueError("Unrecognized endian value '%s' expected @, =, <, >, or !" % endian)
-
-		elif type(endian) == Endianness:
-			# Nothing to do
-			pass
-		else:
-			raise TypeError("Unrecognized type for endian '%s' expected Endianness or string" % type(endian))
-
 		self._src = src
-		self._offset = offset
+		self.Offset = offset
 		self.Endian = endian
+
+	@property
+	def Src(self):
+		"""
+		Gets the data source the unpacking is performed on.
+		"""
+		return self._src
 
 	@property
 	def Offset(self):
@@ -94,6 +78,30 @@ class funpack:
 		"""
 		Sets the endianness.
 		"""
+
+		if type(v) == str:
+			if v == Endianness.Native.value:				v = Endianness.Native
+			elif v == Endianness.NativeNoAlign.value:		v = Endianness.NativeNoAlign
+			elif v == Endianness.Little.value:				v = Endianness.Little
+			elif v == Endianness.Big.value:					v = Endianness.Big
+			elif v == Endianness.Network.value:				v = Endianness.Network
+
+			elif v.lower() == 'native':						v = Endianness.Native
+			elif v.lower() == 'nativenoalign':				v = Endianness.NativeNoAlign
+			elif v.lower() == 'little':						v = Endianness.Little
+			elif v.lower() == 'big':						v = Endianness.Big
+			elif v.lower() == 'net':						v = Endianness.Network
+			elif v.lower() == 'network':					v = Endianness.Network
+
+			else:
+				raise ValueError("Unrecognized v value '%s' expected @, =, <, >, or !, or case-insensitive names native, nativenoalign, little, big, net, or network" % v)
+
+		elif type(v) == Endianness:
+			# Nothing to do
+			pass
+		else:
+			raise TypeError("Unrecognized type for v '%s' expected Endianness or string" % type(v))
+
 		self._endian = v
 
 	def Unpack(self, fmt):
