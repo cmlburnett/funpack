@@ -29,8 +29,9 @@ With funpack:
 	fooa = f.u8()
 	foob,fooc = f.u8(2)
 
-That's it. The offset counter is stored inside the funpack() object and the endianness is automatically applied to each unpack operation.
-The resulting code is significantly cleaner and avoids hard-to-debug messy errors from not passing the extact string to unpack and calcsize, etc.
+That's it.
+The offset counter is stored inside the funpack() object and the endianness is automatically applied to each unpack operation.
+The resulting code is significantly cleaner and avoids hard-to-debug messy errors from not passing the exact string to unpack and calcsize, etc.
 
 funpack functions:
 	pad		Reads padding bytes
@@ -52,4 +53,29 @@ funpack properties:
 	Endian	Gets/sets the endianness of the data source, which can be an Endianness value or string
 	Src		Gets the data source being unpacked
 
+Use the online help for further information:
+
+	$ python3
+	>>> import funpack
+	>>> help(funpack.funpack)
+	Help on class funpack in module funpack:
+
+	class funpack(builtins.object)
+	 |  Fast unpacker class.
+	 |  Uses the struct module that comes with Python and provided faster/easier access to unpacking.
+	 |  Offset within the data source is maintained within and exposed via the Offset property.
+	 |  The endianness is supplied with each unpack call and exposed via the Endian property..
+	 |  Both the offset and endian can be changed at any time.
+	 |  
+	 |  The unpack functions provided are named based on size, rather than an arbitrary character code.
+	 |  Note that not all characters have shortcut functions (mostly because I don't use them).
+	 |  
+	 |  Lastly, you can call Unpack() directly with any format string you need to use.
+	 |  
+	 |  Methods defined here:
+	 |  
+	 |  Unpack(self, fmt)
+	 |      Unpack wraps struct.unpack by using the internal offset counter and the endian specified in the initializer.
+	 |  
+	................
 
