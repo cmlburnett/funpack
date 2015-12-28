@@ -37,17 +37,29 @@ The offset counter is stored inside the funpack() object and the endianness is a
 The resulting code is significantly cleaner and avoids hard-to-debug messy errors from not passing the exact string to unpack and calcsize, etc.
 
 funpack functions:
-	pad		Reads padding bytes
-	u8		Reads 8-bit unsigned integer
-	u16		Reads 16-bit unsigned integer
-	u32		Reads 32-bit unsigned integer
-	u64		Reads 64-bit unsigned integer
-	s8		Reads 8-bit signed integer
-	s16		Reads 16-bit signed integer
-	s32		Reads 32-bit signed integer
-	s64		Reads 64-bit signed integer
-	f32		Reads 32-bit float ("float")
-	f64		Reads 64-bit float ("double")
+	pad				Reads padding bytes
+	u8				Reads 8-bit unsigned integer
+	u16				Reads 16-bit unsigned integer
+	u32				Reads 32-bit unsigned integer
+	u64				Reads 64-bit unsigned integer
+	s8				Reads 8-bit signed integer
+	s16				Reads 16-bit signed integer
+	s32				Reads 32-bit signed integer
+	s64				Reads 64-bit signed integer
+	f32				Reads 32-bit float ("float")
+	f64				Reads 64-bit float ("double")
+	u8len_u8dat		Reads an unsigned 8-bit length and that many unsigned 8-bit bytes
+	u8len_u16dat	Reads an unsigned 8-bit length and that many unsigned 16-bit bytes
+	u8len_u32dat	Reads an unsigned 8-bit length and that many unsigned 32-bit bytes
+	u8len_u64dat	Reads an unsigned 8-bit length and that many unsigned 64-bit bytes
+	u16len_u8dat	Reads an unsigned 16-bit length and that many unsigned 8-bit bytes
+	u16len_u16dat	Reads an unsigned 16-bit length and that many unsigned 16-bit bytes
+	u16len_u32dat	Reads an unsigned 16-bit length and that many unsigned 32-bit bytes
+	u16len_u64dat	Reads an unsigned 16-bit length and that many unsigned 64-bit bytes
+	u8len_f32dat	Reads an unsigned 8-bit length and that many 32-bit floats ("float")
+	u8len_f64dat	Reads an unsigned 8-bit length and that many 64-bit floats ("double")
+	u16len_f32dat	Reads an unsigned 16-bit length and that many 32-bit floats ("float")
+	u16len_f64dat	Reads an unsigned 16-bit length and that many 64-bit floats ("double")
 
 	Unpack	Accepts a struct format string and returns results in a tuple
 
