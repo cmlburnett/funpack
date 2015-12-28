@@ -10,6 +10,7 @@ __all__ = ["Endianness", "funpack"]
 class Endianness(Enum):
 	"""
 	Enum class for endianness of funpack operations.
+	Avoids having to remember the characters.
 	"""
 
 	Native = '@'
@@ -19,9 +20,25 @@ class Endianness(Enum):
 	Network = '!'
 
 class funpack:
-	def __init__(self, src, endian=Endianness.Native):
+	"""
+	Fast unpacker class.
+	Uses the struct module that comes with Python and provided faster/easier access to unpacking.
+	Offset within the data source is maintained within and exposed via the Offset property.
+	The endianness is supplied with each unpack call and exposed via the Endian property..
+	Both the offset and endian can be changed at any time.
+
+	The unpack functions provided are named based on size, rather than an arbitrary character code.
+	Note that not all characters have shortcut functions (mostly because I don't use them).
+
+	Lastly, you can call Unpack() directly with any format string you need to use.
+	"""
+
+	def __init__(self, src, endian=Endianness.Native, offset=0):
 		"""
 		Initialize the fast unpacker with data source @src and use the endian @endian for all unpacks.
+		@src is any type that struct.unpack() accepts.
+		@endian can be either a character (@, =, <, >, or !) or an Endianness enum value.
+		@offset is the default offset to start unpacking from.
 		"""
 
 		if type(endian) == str:
@@ -40,7 +57,7 @@ class funpack:
 			raise TypeError("Unrecognized type for endian '%s' expected Endianness or string" % type(endian))
 
 		self._src = src
-		self._offset = 0
+		self._offset = offset
 		self.Endian = endian
 
 	@property
