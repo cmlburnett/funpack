@@ -60,6 +60,10 @@ funpack functions:
 	u8len_f64dat	Reads an unsigned 8-bit length and that many 64-bit floats ("double")
 	u16len_f32dat	Reads an unsigned 16-bit length and that many 32-bit floats ("float")
 	u16len_f64dat	Reads an unsigned 16-bit length and that many 64-bit floats ("double")
+	u8jump			Reads an unsigned 8-bit jump value and adds it to the Offset
+	u16jump			Reads an unsigned 16-bit jump value and adds it to the Offset
+	u32jump			Reads an unsigned 32-bit jump value and adds it to the Offset
+	u64jump			Reads an unsigned 64-bit jump value and adds it to the Offset
 
 	Unpack	Accepts a struct format string and returns results in a tuple
 
