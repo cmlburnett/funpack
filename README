@@ -15,8 +15,11 @@ With just struct:
 	offset = 0
 	endian = ">"
 
-	fooa,foob,fooc = struct.unpack_from(endian + "BBB", dat, offset)
-	offset += struct.calcsize(endian + "BBB")
+	fooa = struct.unpack_from(endian + "B", dat, offset)[0]
+	offset += struct.calcsize(endian + "B")
+
+	foob,fooc = struct.unpack_from(endian + "BB", dat, offset)
+	offset += struct.calcsize(endian + "BB")
 
 With funpack:
 
