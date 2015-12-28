@@ -1,3 +1,6 @@
+"""
+Fast unpacker -- makes unpacking with struct module much faster and easier to use.
+"""
 
 from enum import Enum
 import struct
@@ -10,6 +13,7 @@ class Endianness(Enum):
 	"""
 
 	Native = '@'
+	NativeNoAlign = '='
 	Little = '<'
 	Big = '>'
 	Network = '!'
@@ -19,6 +23,21 @@ class funpack:
 		"""
 		Initialize the fast unpacker with data source @src and use the endian @endian for all unpacks.
 		"""
+
+		if type(endian) == str:
+			if endian == Endianness.Native.value:			endian = Endianness.Native
+			elif endian == Endianness.NativeNoAlign.value:	endian = Endianness.NativeNoAlign
+			elif endian == Endianness.Little.value:			endian = Endianness.Little
+			elif endian == Endianness.Big.value:			endian = Endianness.Big
+			elif endian == Endianness.Network.value:		endian = Endianness.Network
+			else:
+				raise ValueError("Unrecognized endian value '%s' expected @, =, <, >, or !" % endian)
+
+		elif type(endian) == Endianness:
+			# Nothing to do
+			pass
+		else:
+			raise TypeError("Unrecognized type for endian '%s' expected Endianness or string" % type(endian))
 
 		self._src = src
 		self._offset = 0
@@ -51,7 +70,6 @@ class funpack:
 		Sets the endianness.
 		"""
 		self._endian = v
-
 
 	def Unpack(self, fmt):
 		"""
