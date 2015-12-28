@@ -1,0 +1,35 @@
+funpack -- fast unpacker
+
+This module utilizes the Python module struct to unpack binary structure.
+struct is not a difficult module to use, but it requires you manage your own offset and endianness.
+This requires mixing the data buffer, the offset counter, the endianness char, and unpacked data.
+The goal of this module is to package the first three into one object.
+I also use the module infrequently enough to have to refer to the format characters table every time I use it.
+Thus, the shortcut functions are defined based on size.
+
+With just struct:
+
+	import struct
+
+	dat = ...
+	offset = 0
+	endian = ">"
+
+	fooa,foob,fooc = struct.unpack_from(endian + "BBB", dat, offset)
+	offset += struct.calcsize(endian + "BBB")
+
+With funpack:
+
+	import funpack
+
+	dat = ...
+
+	f = funpack.funpack(dat, endian=funpack.Endianness.Big)
+
+	fooa = f.u8()
+	foob,fooc = f.u8(2)
+
+That's it. The offset counter is stored inside the funpack() object and the endianness is automatically applied to each unpack operation.
+The resulting code is significantly cleaner and avoids hard-to-debug messy errors from not passing the extact string to unpack and calcsize, etc.
+
+
