@@ -127,6 +127,17 @@ class funpack:
 			return self.Unpack(char * times)
 
 	# ----------------------------------------
+	# Other
+
+	def pad(self, times=1):
+		"""
+		"Read" padding bytes, which means nothing is actually read.
+		None is returned always for any amount of @times.
+		"""
+		self.Unpack('x' * times)
+		return None
+
+	# ----------------------------------------
 	# Unsigned
 
 	def u8(self, times=1):
