@@ -112,7 +112,7 @@ class fpack:
 		"Write" padding bytes.
 		None is returned always for any amount of @times.
 		"""
-		self.Pack('x' * times)
+		self.Pack('x' * times, tuple())
 		return None
 
 	# ----------------------------------------
@@ -203,9 +203,8 @@ class fpack:
 		"""
 		ret = []
 		for v in vals:
-			z = self.Pack('%ds' % len(v), v)
+			z = self.Pack('%ds' % len(v), [v])
 			ret.append(z)
-			self._buffer.append(z)
 		return ret
 
 	def string(self, encoding, *vals):
@@ -655,7 +654,7 @@ class funpack:
 		This is a convenience function to string().
 		@ln is number of bytes to unpack (not the number of characters).
 		"""
-		return self.bytes(ln).decode(encoding)
+		return self.bytes(ln).decode('ascii')
 
 	def string_utf8(self, ln):
 		"""
@@ -663,7 +662,7 @@ class funpack:
 		This is a convenience function to string().
 		@ln is number of bytes to unpack (not the number of characters).
 		"""
-		return self.bytes(ln).decode(encoding)
+		return self.bytes(ln).decode('utf-8')
 
 	def string_utf16(self, ln):
 		"""
@@ -671,7 +670,7 @@ class funpack:
 		This is a convenience function to string().
 		@ln is number of bytes to unpack (not the number of characters).
 		"""
-		return self.bytes(ln).decode(encoding)
+		return self.bytes(ln).decode('utf-16')
 
 	def string_utf32(self, ln):
 		"""
@@ -679,7 +678,7 @@ class funpack:
 		This is a convenience function to string().
 		@ln is number of bytes to unpack (not the number of characters).
 		"""
-		return self.bytes(ln).decode(encoding)
+		return self.bytes(ln).decode('utf-32')
 
 	# ----------------------------------------
 	# Length-driven reads
