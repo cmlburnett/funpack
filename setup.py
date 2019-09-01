@@ -1,12 +1,12 @@
 from distutils.core import setup
 
 majv = 1
-minv = 0
+minv = 1
 
 setup(
 	name = 'funpack',
 	version = "%d.%d" %(majv,minv),
-	description = "Python module make the built-in struct module easier to use for unpacking",
+	description = "Python module make the built-in struct module easier to use for packing and unpacking binary data",
 	author = "Colin ML Burnett",
 	author_email = "cmlburnett@gmail.com",
 	url = "",
