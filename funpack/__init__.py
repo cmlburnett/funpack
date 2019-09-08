@@ -469,6 +469,20 @@ class funpack:
 		"""
 		return self._endian
 
+	@property
+	def Length(self):
+		"""
+		Gets the total bytes..
+		"""
+		return len(self._src)
+
+	@property
+	def Remains(self):
+		"""
+		Gets the remaining bytes left.
+		"""
+		return self.Length - self.Offset
+
 	@Endian.setter
 	def Endian(self, v):
 		"""
